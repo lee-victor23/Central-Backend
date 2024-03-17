@@ -2,14 +2,15 @@ const pool = require('../database'); // Update the path according to your struct
 
 const createInvoice = async (Invoice) => {
     const { invoice_number, customer_id, amount, invoice_date } = Invoice;
+    const now = new Date();
     const newInvoice = await pool.query(
         'INSERT INTO invoices (invoice_number, customer_id, amount, invoice_date, created_at) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-        [invoice_number, customer_id, amount, invoice_date, created_at]
+        [invoice_number, customer_id, amount, invoice_date, now]
     );
     return newInvoice.rows[0];
 };
 
-const getAllInvoices = async () => {
+const getInvoices = async () => {
     const allInvoices = await pool.query('SELECT * FROM invoices');
     return allInvoices.rows;
 };
@@ -35,7 +36,7 @@ const deleteInvoice = async (id) => {
 
 module.exports = {
     createInvoice,
-    getAllInvoices,
+    getInvoices,
     getInvoiceById,
     updateInvoice,
     deleteInvoice

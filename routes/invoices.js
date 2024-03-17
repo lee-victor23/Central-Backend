@@ -2,16 +2,16 @@ const express = require("express");
 const router = express.Router();
 const {
   createInvoice,
-  getAllInvoices,
+  getInvoices,
   getInvoiceById,
   updateInvoice,
   deleteInvoice,
-} = require("../Services/invoices"); // Update the path accordingly
+} = require("../services/invoices"); // Update the path accordingly
 
 // READ all invoices
 router.get("/invoices", async (req, res) => {
   try {
-    const allCustomers = await getAllInvoices();
+    const allCustomers = await getInvoices();
     res.json(allCustomers);
   } catch (err) {
     console.error(err.message);
@@ -53,7 +53,7 @@ router.put("/invoices/:id", async (req, res) => {
     if (!updatedInvoice) {
       return res.status(404).send("Invoice not found");
     }
-    res.json(updatedCustomer);
+    res.json(updatedInvoice);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
