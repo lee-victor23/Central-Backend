@@ -9,7 +9,7 @@ const createCustomer = async (customer) => {
     return newCustomer.rows[0];
 };
 
-const getAllCustomers = async () => {
+const getCustomers = async () => {
     const allCustomers = await pool.query('SELECT * FROM customers');
     return allCustomers.rows;
 };
@@ -35,7 +35,7 @@ const deleteCustomer = async (id) => {
 
 module.exports = {
     createCustomer,
-    getAllCustomers,
+    getCustomers,
     getCustomerById,
     updateCustomer,
     deleteCustomer

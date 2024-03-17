@@ -2,16 +2,16 @@ const express = require("express");
 const router = express.Router();
 const {
   createCustomer,
-  getAllCustomers,
+  getCustomers,
   getCustomerById,
   updateCustomer,
   deleteCustomer,
-} = require("../Services/customers");
+} = require("../services/customers");
 
 // READ all customers
 router.get("/customers", async (req, res) => {
   try {
-    const allCustomers = await getAllCustomers();
+    const allCustomers = await getCustomers();
     res.json(allCustomers);
   } catch (err) {
     console.error(err.message);
