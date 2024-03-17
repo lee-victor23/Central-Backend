@@ -1,4 +1,4 @@
-const pool = require('../database'); // Update the path according to your structure
+const pool = require('../database/database'); // Update the path according to your structure
 
 const createCustomer = async (customer) => {
     const { name, address, phone_number, email_address } = customer;
