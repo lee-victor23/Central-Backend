@@ -1,7 +1,10 @@
 require("dotenv").config();
+
 const express = require("express");
-const pool = require("./database");
-const logger = require("./apilogger");
+
+const pool = require("./database/database");
+const logger = require("./logger/logger");
+
 const customerRoutes = require('./routes/customers');
 const invociesRoutes = require('./routes/invoices');
 
