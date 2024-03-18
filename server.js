@@ -3,9 +3,9 @@ require("dotenv").config();
 const cors = require('cors');
 const express = require("express");
 
-const pool = require("./database/database");
 const logger = require("./logger/logger");
 
+const gridDataRoutes = require('./services/gridData');
 const customerRoutes = require('./services/customer');
 const invociesRoutes = require('./routes/invoices');
 
@@ -14,6 +14,7 @@ const PORT = 3000;
 
 app.use(cors());
 app.use(express.json()); 
+app.use(gridDataRoutes);
 app.use(customerRoutes);
 
 // Using in an express application
