@@ -1,29 +1,24 @@
-const { Pool } = require('pg');
+const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-// Create a new pool instance to manage your PostgreSQL connections
-const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_DATABASE,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
+const sequelize  = new Sequelize( process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: 'postgres'
+  // additional options
 });
 
-// Test the connection
-pool.connect((err, client, release) => {
-  if (err) {
-    return console.error('Error acquiring client', err.stack);
+async function testConnection() {
+  try {
+    await sequelize.authenticate(); 
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.log('Unable to connect to the database:', error);
+  } finally {
+    await sequelize.close();
   }
-  console.log('Connected to PostgreSQL DB');
-  client.query('SELECT NOW()', (err, result) => {
-    release();
-    if (err) {
-      return console.error('Error executing query', err.stack);
-    }
-    console.log(result.rows); // This will show the current date and time in the console
-  });
-});
+}
 
-module.exports = pool; // Export the pool for use elsewhere in your app
+//testConnection();
+
+module.exports = sequelize;
 
