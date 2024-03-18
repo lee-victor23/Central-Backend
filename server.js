@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const cors = require('cors');
 const express = require("express");
 
 const pool = require("./database/database");
@@ -11,8 +12,7 @@ const invociesRoutes = require('./routes/invoices');
 const app = express();
 const PORT = 3000;
 
-console.log(customerRoutes);
-
+app.use(cors());
 app.use(express.json()); 
 app.use(customerRoutes);
 app.use(invociesRoutes);
