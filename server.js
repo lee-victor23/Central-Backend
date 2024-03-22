@@ -5,6 +5,7 @@ const express = require("express");
 
 const logger = require("./logger/logger");
 
+const authRoutes = require('./services/auth');
 const gridDataRoutes = require('./services/gridData');
 const customerRoutes = require('./services/customer');
 const invociesRoutes = require('./routes/invoices');
@@ -14,6 +15,7 @@ const PORT = 3000;
 
 app.use(cors());
 app.use(express.json()); 
+app.use(authRoutes);
 app.use(gridDataRoutes);
 app.use(customerRoutes);
 
