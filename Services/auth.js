@@ -11,14 +11,9 @@ const JWT_SECRET = process.env.JWT_SECRET; // Make sure to use a strong, secure 
 router.post("/api/auth/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    console.log('Email:',email);
-    console.log('Password:',password);
     // Find user in the userList
     const user = userList.find((user) => user.username === email);
-
-    console.log(userList);
-    console.log(user);
+    
     // If user not found or password doesn't match (use bcrypt.compare for hashed passwords)
     if (!user || !(user.password === password /* or await bcrypt.compare(password, user.password) for hashed passwords */)) {
       return res.status(401).send("Username or password is incorrect");

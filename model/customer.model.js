@@ -32,8 +32,4 @@ const Customer = sequelize.define(
   }
 );
 
-// Customer.sync().then(() => {
-//     console.log('The table for the Customer model was just (re)created!');
-//   });
-
 module.exports = Customer;
